@@ -7,3 +7,6 @@ My solution is /kattis/mandelbrot.cpp
 Revised this first assignment: 
 /kattis/checksum.py solves Luhn's Checksum: 
 https://open.kattis.com/problems/luhnchecksum
+
+test.py demonstrates the difference between secret() and random() in python, in which secret() is cryptographically 
+secure.
