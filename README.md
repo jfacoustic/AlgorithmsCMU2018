@@ -9,4 +9,4 @@ Revised this first assignment:
 https://open.kattis.com/problems/luhnchecksum
 
 test.py demonstrates the difference between secret() and random() in python, in which secret() is cryptographically 
-secure.
+secure.  This is for the random assignment.
