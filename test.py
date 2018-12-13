@@ -4,48 +4,49 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# This compares random() to secret() where 
+# This compares random() to secret() where
 # secret() is cryptographically secure.
-def randomTest():
-    x = []
-    y = []
-    c = 0
-    for i in range(10000):
-        x.append(random.randint(0,9))
-        #print(str(i) + " " + str(len(x)))
+def randomTest(n):
+    x = np.empty([n])
+    y = np.empty([10])
+    index = []
     for i in range(10):
-        #print(str(i) + " " + str(x.count(i)))
-        y.append(x.count(i))
-        c += x.count(i)
-    #print(c)
-    #print(len(x))
-    return(y)
-
-def secretsTest():
-    x = []
-    y = np.empty([], dtype=int)
-    c = 0
-    for i in range(10000):
-        x.append(secrets.randbelow(10))
+        index.append(i)
+    print(index)
+    for i in range(n):
+        x[i] = random.randint(0,9)
+    unique, counts = np.unique(x, return_counts=True)
+    dist = dict(zip(unique, counts))
+    count = 0
     for i in range(10):
-     #   print(str(i) + " " + str(x.count(i)))
-        np.append(y, x.count(i))
-        c += x.count(i)
-    #print(c)
-    return(y)
+        y[i] = dist[i]
+        count += y[i]
+    print(y)
+    print(count/10)
+    plt.bar(index,y)
+    plt.show()
 
-tot = [0] * 10
-for i in range(1000):
-    x = randomTest()
-    #print(x)
-    for j in range(10):
-        tot[j] += x[j]
-for i in range(10):
-    print(tot[i] / 1000.)
+def secretsTest(n):
+    x = np.empty([n])
+    y = np.empty([10])
+    index = []
+    for i in range(10):
+        index.append(i)
+    print(index)
 
+    for i in range(n):
+        x[i] = secrets.randbelow(10)
+    unique, counts = np.unique(x, return_counts=True)
+    dist = dict(zip(unique,counts))
 
-print("\n")
-secretsTest()
+    count = 0
+    for i in range(10):
+        y[i] = dist[i]
+        count += y[i]
+    print(y)
+    print(count/10.)
+    plt.bar(index,y)
+    plt.show()
 
-
-    
+randomTest(100)
+secretsTest(100)
